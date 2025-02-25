@@ -1,0 +1,17 @@
+--hidden
+200
+100
+50
+25
+12
+6
+--lrate
+0.001
+--output_type
+dtheta
+--predict_dim
+1
+--epochs
+1000
+
+

@@ -1,0 +1,11 @@
+/code/__pycache__
+/code/figure_*
+!/code/results
+/code/results/*
+/code/wandb
+
+/submit
+
+/report/*
+!/report/report.org
+!/report/report.pdf
