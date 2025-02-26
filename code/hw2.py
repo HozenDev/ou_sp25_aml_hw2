@@ -494,6 +494,8 @@ def check_completeness(args:argparse.ArgumentParser):
 #################################################################
 
 if __name__ == "__main__":
+    print("Enter to python code")
+    
     parser = create_parser()
     args = parser.parse_args()
     check_args(args)

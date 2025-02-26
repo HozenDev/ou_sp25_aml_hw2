@@ -3,16 +3,16 @@
 # Reasonable partitions: debug_5min, debug_30min, normal, debug_gpu, gpu
 
 #
-#SBATCH --partition=normal
+#SBATCH --partition=debug_5min
 #SBATCH --ntasks=1
-#SBATCH --cpus-per-task=40
+#SBATCH --cpus-per-task=10
 #SBATCH --mem=1G
 
 # The %j is translated into the job number
 #SBATCH --output=results/hw2_%j_stdout.txt
 #SBATCH --error=results/hw2_%j_stderr.txt
 
-#SBATCH --time=00:50:00
+#SBATCH --time=00:05:00
 #SBATCH --job-name=hw2
 #SBATCH --mail-user=Enzo.B.Durel-1@ou.edu
 #SBATCH --mail-type=ALL
@@ -24,7 +24,6 @@
 
 . /home/fagg/tf_setup.sh
 conda activate dnn
-module load cuDNN/8.9.2.26-CUDA-12.2.0
 
 # Clean results repo and wandb
 # ./clean.sh 
@@ -39,11 +38,13 @@ NTRAINING_LENGTH=${#NTRAINING_VALUES[@]}
 NTRAINING_INDEX=$(($SLURM_ARRAY_TASK_ID % $NTRAINING_LENGTH))
 ROTATION_INDEX=$(($SLURM_ARRAY_TASK_ID / $NTRAINING_LENGTH))
 
+echo "Job Information (batch.sh)"
+echo "EXP_INDEX: $SLURM_ARRAY_TASK_ID"
 echo "NTRAINING_INDEX: $NTRAINING_INDEX"
 echo "ROTATION_INDEX: $ROTATION_INDEX"
-
 echo "NTRAINING: ${NTRAINING_VALUES[$NTRAINING_INDEX]}"
 echo "ROTATION: ${ROTATION[$ROTATION_INDEX]}"
+echo "Python Information (hw2.py)"
 
 # --Ntraining ${NTRAINING_VALUES[$EXP_INDEX]} \  
 # --Ntraining 14
