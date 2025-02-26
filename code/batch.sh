@@ -12,7 +12,7 @@
 #SBATCH --output=results/hw1_%j_stdout.txt
 #SBATCH --error=results/hw1_%j_stderr.txt
 
-#SBATCH --time=00:05:00
+#SBATCH --time=00:50:00
 #SBATCH --job-name=hw1
 #SBATCH --mail-user=Enzo.B.Durel-1@ou.edu
 #SBATCH --mail-type=ALL
@@ -53,16 +53,13 @@ echo "ROTATION: ${ROTATION[$ROTATION_INDEX]}"
 # Using GPU add this to python execution
 # --cpus-per-task $SLURM_CPUS_PER_TASK \
 
-# python hw1.py @net.txt \
-#        --exp_type $EXPERIMENT_TYPE \
-#        --dataset $DATASET \
-#        --Ntraining ${NTRAINING_VALUES[$EXP_INDEX]} \
-#        --rotation $ROTATION \
-#        --activation_out 'linear' \
-#        --activation_hidden 'elu' \
-#        --epochs 300 \
-#        --hidden 8 4\
-#        --lrate 0.0001 \
-#        --output_type dtheta \
-#        --patience 50 \
-#        --label "exp"
+python hw1.py @net.txt \
+       --exp_type $EXPERIMENT_TYPE \
+       --exp_index $SLURM_ARRAY_TASK_ID \
+       --dataset $DATASET \
+       --Ntraining ${NTRAINING_VALUES[$EXP_INDEX]} \
+       --rotation $ROTATION \
+       --activation_out 'linear' \
+       --activation_hidden 'elu' \
+       --label "exp" \
+       --no_wandb

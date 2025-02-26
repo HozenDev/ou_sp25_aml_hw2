@@ -49,7 +49,7 @@ def load_results_fig2():
 
     return pd.DataFrame(results).sort_values("Ntraining")
 
-def plot_figure_2():
+def plot_figure_2(nowandb = False):
     """
     Generate Figure 2: FVAF and RMSE vs. Training Set Size using Matplotlib.
 
@@ -92,9 +92,10 @@ def plot_figure_2():
     plt.savefig("figure_2b.png")
 
     # Log to wandb
-    wandb.log({"Figure 2a": wandb.Image("figure_2a.png"), "Figure 2b": wandb.Image("figure_2b.png")})
+    if not nowandb:
+        wandb.log({"Figure 2a": wandb.Image("figure_2a.png"), "Figure 2b": wandb.Image("figure_2b.png")})
 
-def plot_figure_1(time_testing, outs_testing, predict_testing):
+def plot_figure_1(time_testing, outs_testing, predict_testing, nowandb = False):
     """
     Generates Figure 1: True Acceleration vs. Predicted Velocity (Shoulder & Elbow) using Matplotlib.
 
@@ -128,4 +129,6 @@ def plot_figure_1(time_testing, outs_testing, predict_testing):
 
     # Save and log to wandb
     plt.savefig("figure_1.png")
-    wandb.log({"Figure 1": wandb.Image("figure_1.png")})
+
+    if not nowandb:
+        wandb.log({"Figure 1": wandb.Image("figure_1.png")})
