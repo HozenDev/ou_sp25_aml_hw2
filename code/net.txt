@@ -13,5 +13,3 @@ dtheta
 1
 --epochs
 1000
-
-

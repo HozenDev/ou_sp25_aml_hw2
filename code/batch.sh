@@ -3,7 +3,7 @@
 # Reasonable partitions: debug_5min, debug_30min, normal, debug_gpu, gpu
 
 #
-#SBATCH --partition=normal
+#SBATCH --partition=debug_30min
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=40
 #SBATCH --mem=1G
@@ -17,7 +17,7 @@
 #SBATCH --mail-user=Enzo.B.Durel-1@ou.edu
 #SBATCH --mail-type=ALL
 #SBATCH --chdir=/home/cs504305/hw2/code
-#SBATCH --array=0-3
+#SBATCH --array=0
 #
 #################################################
 # Do not change this line unless you have your own python/tensorflow/keras set up
