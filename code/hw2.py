@@ -123,7 +123,7 @@ def exp_type_to_hyperparameters(args:argparse.ArgumentParser):
     if args.exp_type == 'bmi':
         # HW 1
         p = {'Ntraining': [1, 2, 3, 4, 6, 8, 11, 14, 18], 
-             'rotation': [15]
+             'rotation': [0, 2, 4, 6, 8, 10, 12, 14, 16, 18],
              }
     else: 
         assert False, "Bad exp_type"
