@@ -17,7 +17,7 @@
 #SBATCH --mail-user=Enzo.B.Durel-1@ou.edu
 #SBATCH --mail-type=ALL
 #SBATCH --chdir=/home/cs504305/hw2/code
-#SBATCH --array=0-89
+#SBATCH --array=0-3
 #
 #################################################
 # Do not change this line unless you have your own python/tensorflow/keras set up
@@ -35,8 +35,6 @@ DATASET='/home/fagg/datasets/bmi/bmi_dataset.pkl'
 NTRAINING_VALUES=(1 2 3 4 6 8 11 14 18)
 ROTATION=(0 2 4 6 8 10 12 14 16 18)
 NTRAINING_LENGTH=${#NTRAINING_VALUES[@]}
-
-SLURM_ARRAY_TASK_ID=89
 
 NTRAINING_INDEX=$(($SLURM_ARRAY_TASK_ID % $NTRAINING_LENGTH))
 ROTATION_INDEX=$(($SLURM_ARRAY_TASK_ID / $NTRAINING_LENGTH))
@@ -62,4 +60,4 @@ python hw2.py @net.txt \
        --activation_out 'linear' \
        --activation_hidden 'elu' \
        --label "exp" \
-       --no_wandb
+       --nowandb

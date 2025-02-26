@@ -280,10 +280,11 @@ def execute_exp(args:argparse.ArgumentParser=None):
     
     # Callbacks
     cbs = []
-    early_stopping_cb = keras.callbacks.EarlyStopping(patience=args.patience,
+    if args.early_stopping:
+        early_stopping_cb = keras.callbacks.EarlyStopping(patience=args.patience,
                                                       restore_best_weights=True,
                                                       min_delta=args.min_delta)
-    cbs.append(early_stopping_cb)
+        cbs.append(early_stopping_cb)
 
     # WandB callback
     if not args.nowandb:
@@ -372,7 +373,7 @@ def execute_exp(args:argparse.ArgumentParser=None):
 #                       Argument Parser                         #
 #################################################################
 
-def create_parser()->argparse.ArgumentParser:
+def create_parser():
     # Parse the command-line arguments
     parser = argparse.ArgumentParser(description='BMI Learner', fromfile_prefix_chars='@')
 
@@ -406,6 +407,7 @@ def create_parser()->argparse.ArgumentParser:
     parser.add_argument('--L2_regularization', '--l2', type=float, default=None, help="L2 regularization factor")
 
     # Early stopping
+    parser.add_argument('--early_stopping', action='store_true', help='Enable EarlyStopping with patience of 100')
     parser.add_argument('--min_delta', type=float, default=0.001, help="Minimum delta for early termination")
     parser.add_argument('--patience', type=int, default=100, help="Patience for early termination")
 
