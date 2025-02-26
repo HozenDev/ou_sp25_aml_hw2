@@ -59,4 +59,4 @@ python hw2.py \
        --activation_hidden 'elu' \
        --label "exp" \
        --nowandb \
-       --vvvv
+       -vvvv
