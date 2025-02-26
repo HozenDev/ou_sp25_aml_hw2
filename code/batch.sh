@@ -3,9 +3,9 @@
 # Reasonable partitions: debug_5min, debug_30min, normal, debug_gpu, gpu
 
 #
-#SBATCH --partition=debug_5min
+#SBATCH --partition=normal
 #SBATCH --ntasks=1
-#SBATCH --cpus-per-task=10
+#SBATCH --cpus-per-task=40
 #SBATCH --mem=1G
 
 # The %j is translated into the job number
