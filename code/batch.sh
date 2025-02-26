@@ -52,7 +52,12 @@ echo "Python Information (hw2.py)"
 # Using GPU add this to python execution
 # --cpus-per-task $SLURM_CPUS_PER_TASK \
 
-python hw2.py @net.txt \
+python hw2.py \
+       --hidden 200 100 50 25 12 6 \
+       --lrate 0.001 \
+       --output_type dtheta \
+       --predict_dim 1 \
+       --epochs 1000 \
        --exp_type $EXPERIMENT_TYPE \
        --exp_index $SLURM_ARRAY_TASK_ID \
        --dataset $DATASET \

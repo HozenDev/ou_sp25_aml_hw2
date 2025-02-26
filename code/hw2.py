@@ -361,8 +361,9 @@ def execute_exp(args:argparse.ArgumentParser=None):
 
     # Plot figures
     if not args.nowandb:
-        plot_figure_1(time_testing, outs_testing, results['predict_testing'])
-        plot_figure_2()
+        # plot_figure_1(time_testing, outs_testing, results['predict_testing'])
+        # plot_figure_2()
+        pass
 
     # Close out wandb
     if not args.nowandb: wandb.finish()
