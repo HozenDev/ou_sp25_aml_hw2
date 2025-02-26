@@ -17,7 +17,7 @@
 #SBATCH --mail-user=Enzo.B.Durel-1@ou.edu
 #SBATCH --mail-type=ALL
 #SBATCH --chdir=/home/cs504305/hw2/code
-#SBATCH --array=0
+#SBATCH --array=0-89
 #
 #################################################
 # Do not change this line unless you have your own python/tensorflow/keras set up
@@ -59,4 +59,3 @@ python hw2.py \
        --activation_hidden 'elu' \
        --label "exp" \
        --nowandb \
-       -vvvv
