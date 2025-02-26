@@ -9,14 +9,14 @@
 #SBATCH --mem=1G
 
 # The %j is translated into the job number
-#SBATCH --output=results/hw1_%j_stdout.txt
-#SBATCH --error=results/hw1_%j_stderr.txt
+#SBATCH --output=results/hw2_%j_stdout.txt
+#SBATCH --error=results/hw2_%j_stderr.txt
 
 #SBATCH --time=00:50:00
-#SBATCH --job-name=hw1
+#SBATCH --job-name=hw2
 #SBATCH --mail-user=Enzo.B.Durel-1@ou.edu
 #SBATCH --mail-type=ALL
-#SBATCH --chdir=/home/cs504305/hw1/code
+#SBATCH --chdir=/home/cs504305/hw2/code
 #SBATCH --array=0-89
 #
 #################################################
@@ -53,7 +53,7 @@ echo "ROTATION: ${ROTATION[$ROTATION_INDEX]}"
 # Using GPU add this to python execution
 # --cpus-per-task $SLURM_CPUS_PER_TASK \
 
-python hw1.py @net.txt \
+python hw2.py @net.txt \
        --exp_type $EXPERIMENT_TYPE \
        --exp_index $SLURM_ARRAY_TASK_ID \
        --dataset $DATASET \
