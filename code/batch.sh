@@ -38,14 +38,6 @@ NTRAINING_LENGTH=${#NTRAINING_VALUES[@]}
 NTRAINING_INDEX=$(($SLURM_ARRAY_TASK_ID % $NTRAINING_LENGTH))
 ROTATION_INDEX=$(($SLURM_ARRAY_TASK_ID / $NTRAINING_LENGTH))
 
-echo "Job Information (batch.sh)"
-echo "EXP_INDEX: $SLURM_ARRAY_TASK_ID"
-echo "NTRAINING_INDEX: $NTRAINING_INDEX"
-echo "ROTATION_INDEX: $ROTATION_INDEX"
-echo "NTRAINING: ${NTRAINING_VALUES[$NTRAINING_INDEX]}"
-echo "ROTATION: ${ROTATION[$ROTATION_INDEX]}"
-echo "Python Information (hw2.py)"
-
 # --Ntraining ${NTRAINING_VALUES[$EXP_INDEX]} \  
 # --Ntraining 14
 
@@ -66,4 +58,5 @@ python hw2.py \
        --activation_out 'linear' \
        --activation_hidden 'elu' \
        --label "exp" \
-       --nowandb
+       --nowandb \
+       --vvvv
