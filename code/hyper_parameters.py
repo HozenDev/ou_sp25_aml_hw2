@@ -78,7 +78,7 @@ def statistical_comparisons(df):
     results, best_dropout, best_l2 = compute_best_test_performance(df)
     ntraining_cases = [1, 18]
 
-    no_reg = load_results(["./part_1_pkl/"])
+    no_reg = load_results(["./results_part1/"])
     early_stopping = load_results(["./results_part2/"])
 
     dropout_raw = load_results(["./results_part3/"])
