@@ -476,14 +476,11 @@ def check_completeness(args:argparse.ArgumentParser):
     # Iterate over all possible jobs
     for i in range(ji.get_njobs()):
         params_str = ji.set_attributes_by_index(i, args)
-        print(params_str)
         # Compute output file name base
         fbase = generate_fname(args, params_str)
-        print(fbase)
     
         # Output pickle file name
         fname_out = "%s_results.pkl"%(fbase)
-        print(fname_out)
 
         if not os.path.exists(fname_out):
             # Results file does not exist: report it
