@@ -18,15 +18,12 @@ def load_results(results_dir=RESULTS):
         with open(file_path, "rb") as fp:
             data = pickle.load(fp)
 
-        match = re.search(r'rotation_(\d+)_Ntraining_(\d+)', filename)
-        rotation = int(match.group(1)) if match else None
-        ntraining = int(match.group(2)) if match else None
-        
-        dropout_match = re.search(r'drop_(\d+\.\d+)', filename)
-        dropout = float(dropout_match.group(1)) if dropout_match else None
-        
-        l2_match = re.search(r'L2_(\d+\.\d+)', filename)
-        l2_reg = float(l2_match.group(1)) if l2_match else None
+        rotation = data["args"].rotation
+        ntraining = data["args"].Ntraining
+        dropout = data["args"].dropout
+        l2_reg = data["args"].L2_regularization
+
+        print(f"Rotation: {rotation}, Ntraining: {ntraining}, Dropout: {dropout}, L2 Regularization: {l2_reg}")
 
         early_stopping = data["args"].early_stopping
         
@@ -137,10 +134,10 @@ def plot_figure_5(df_mean):
 
 # Generate all figures
 def generate_all_figures():
-    df = load_results("./part_1_pkl/")
+    df = load_results("./results_part3/")
     
-    plot_figure_1(df)
-    # plot_figure_2(df)
+    # plot_figure_1(df)
+    plot_figure_2(df)
     # plot_figure_3(df)
     # plot_figure_4(df)
     # plot_figure_5(df)
