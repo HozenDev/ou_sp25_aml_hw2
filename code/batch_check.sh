@@ -25,4 +25,4 @@ conda activate dnn
 # Clean results repo and wandb
 # ./clean.sh 
 
-python hw2.py --check --exp_type 'bmi' --label 'exp' --exp_type 'theta'
+python hw2.py --check --exp_type 'bmi' --label 'exp' --output_type 'theta'
