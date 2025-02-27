@@ -107,6 +107,7 @@ def plot_figure_5():
 
     plt.xlabel("Number of Training Folds")
     plt.ylabel("Mean FVAF (Test Set)")
+    plt.ylim([0, 1])
     plt.legend()
     plt.title("Figure 5: Test Performance Across All Model Types")
     plt.grid()
@@ -117,14 +118,14 @@ def plot_figure_5():
 
 # Generate all figures
 def generate_all_figures():    
-    # plot_figure_1()
-    # plot_figure_2()
-    # plot_figure_3()
-    # plot_figure_4()
-    # plot_figure_5()
+    plot_figure_1()
+    plot_figure_2()
+    plot_figure_3()
+    plot_figure_4()
+    plot_figure_5()
 
-    #df = load_results(["results_part1", "./results_part2", "./results_part3", "./results_part4", "./results_part5/"])
-    #statistical_comparisons(df)
+    df = load_results(["results_part1", "./results_part2", "./results_part3", "./results_part4", "./results_part5/"])
+    statistical_comparisons(df)
 
     pass
 
