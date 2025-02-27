@@ -3,7 +3,7 @@
 # Reasonable partitions: debug_5min, debug_30min, normal, debug_gpu, gpu
 
 #
-#SBATCH --partition=normal
+#SBATCH --partition=gpu
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=40
 #SBATCH --mem=1G
@@ -12,7 +12,7 @@
 #SBATCH --output=results_part5/hw2_%j_stdout.txt
 #SBATCH --error=results_part5/hw2_%j_stderr.txt
 
-#SBATCH --time=00:45:00
+#SBATCH --time=01:00:00
 #SBATCH --job-name=hw2
 #SBATCH --mail-user=Enzo.B.Durel-1@ou.edu
 #SBATCH --mail-type=ALL
