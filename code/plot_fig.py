@@ -5,7 +5,7 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 
-from hyper_parameters import *
+# from hyper_parameters import *
 
 # Directory containing result files
 RESULTS = ["./results/"]
@@ -18,8 +18,6 @@ def load_results(results_dir=RESULTS):
         files.extend([os.path.join(r_dir, f) for f in os.listdir(r_dir) if f.startswith("bmi") and f.endswith(".pkl") and ('rotation_0' in f or 'rotation_18' in f)])
 
     for filename in files:
-        print(filename)
-        
         with open(filename, "rb") as fp:
             data = pickle.load(fp)
 
@@ -34,7 +32,7 @@ def load_results(results_dir=RESULTS):
         # l2_reg = data.get("L2_regularization")
 
         # early_stopping = data["args"].early_stopping
-        
+
         if ntraining is not None and rotation is not None:
             results.append({
                 "Ntraining": ntraining,
@@ -133,7 +131,7 @@ def plot_figure_4():
 
     
     plot_figure(ntraining_values, 
-                [df["FVAF_val"] for df in df_list],
+                [d["FVAF_val"] for d in df_list],
                 l2_labels,
                 "Figure 4: Validation FVAF vs. Training Set Size (L2 Regularization)",
                 "FVAF",
@@ -167,8 +165,8 @@ def plot_figure_5(df):
 def generate_all_figures():    
     # plot_figure_1()
     # plot_figure_2()
-    plot_figure_3()
-    # plot_figure_4()
+    # plot_figure_3()
+    plot_figure_4()
     # plot_figure_5()
 
 if __name__ == "__main__":
