@@ -9,8 +9,8 @@
 #SBATCH --mem=1G
 
 # The %j is translated into the job number
-#SBATCH --output=results_part3/hw2_%j_stdout.txt
-#SBATCH --error=results_part3/hw2_%j_stderr.txt
+#SBATCH --output=results_part5/hw2_%j_stdout.txt
+#SBATCH --error=results_part5/hw2_%j_stderr.txt
 
 #SBATCH --time=00:45:00
 #SBATCH --job-name=hw2
@@ -29,7 +29,7 @@ conda activate dnn
 # ./clean.sh 
 
 # Define experiment parameters
-EXPERIMENT_TYPE='bmi_part34'
+EXPERIMENT_TYPE='bmi_part5'
 DATASET='/home/fagg/datasets/bmi/bmi_dataset.pkl'
 NTRAINING_VALUES=(1 2 3 4 6 8 11 14 18)
 ROTATION_VALUES=(0 2 4 6 8 10 12 14 16 18)
@@ -54,4 +54,4 @@ python hw2.py \
        --nowandb \
        --gpu \
        --cpus_per_task $SLURM_CPUS_PER_TASK \
-       --results_path './results_part3/' \
+       --results_path './results_part5/' \

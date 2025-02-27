@@ -9,8 +9,8 @@
 #SBATCH --mem=1G
 
 # The %j is translated into the job number
-#SBATCH --output=results_part3/hw2_%j_stdout.txt
-#SBATCH --error=results_part3/hw2_%j_stderr.txt
+#SBATCH --output=results_part4/hw2_%j_stdout.txt
+#SBATCH --error=results_part4/hw2_%j_stderr.txt
 
 #SBATCH --time=00:45:00
 #SBATCH --job-name=hw2
@@ -54,4 +54,5 @@ python hw2.py \
        --nowandb \
        --gpu \
        --cpus_per_task $SLURM_CPUS_PER_TASK \
-       --results_path './results_part3/' \
+       --results_path './results_part4/' \
+       --early_stopping

@@ -120,12 +120,20 @@ def exp_type_to_hyperparameters(args:argparse.ArgumentParser):
     :param args: ArgumentParser
     :return: Hyperparameter set (in dictionary form)
     '''
-    if args.exp_type == 'bmi':
-        # HW 1
+    if args.exp_type == 'bmi_part12':
+        p = {'rotation': [0, 2, 4, 6, 8, 10, 12, 14, 16, 18],
+             'Ntraining': [1, 2, 3, 4, 6, 8, 11, 14, 18],
+             }
+    elif args.exp_type == 'bmi_part34':
         p = {'rotation': [0, 2, 4, 6, 8, 10, 12, 14, 16, 18],
              'Ntraining': [1, 2, 3, 4, 6, 8, 11, 14, 18],
              'dropout': [0.015625, 0.03125, 0.0675, 0.125, 0.25, 0.5],
              }
+    elif args.exp_type == 'bmi_part5':
+        p = {'rotation': [0, 2, 4, 6, 8, 10, 12, 14, 16, 18],
+             'Ntraining': [1, 2, 3, 4, 6, 8, 11, 14, 18],
+             'L2_regularization': [0.1, 0.01, 0.001, 0.0001, 0.00001],
+             }        
     else: 
         assert False, "Bad exp_type"
 
