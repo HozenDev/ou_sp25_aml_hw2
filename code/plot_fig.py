@@ -5,6 +5,8 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 
+from hyper_parameters import *
+
 # Directory containing result files
 RESULTS = ["./results/"]
 
@@ -13,7 +15,7 @@ def load_results(results_dir=RESULTS):
     results = []
     files = []
     for r_dir in results_dir:
-        files.extend([os.path.join(r_dir, f) for f in os.listdir(r_dir) if f.startswith("bmi") and f.endswith(".pkl") and 'rotation_0' in f])
+        files.extend([os.path.join(r_dir, f) for f in os.listdir(r_dir) if f.startswith("bmi") and f.endswith(".pkl") and ('rotation_0' in f or 'rotation_18' in f)])
 
     for filename in files:
         print(filename)
@@ -137,18 +139,29 @@ def plot_figure_4():
                 "FVAF",
                 "figure_4.png")
 
-# Figure 5: Comparing All Methods
-def plot_figure_5():
-    df = load_results(["./results_part6/"])
-
-    ntraining_values = df.index.tolist()
+# Figure 5: Test Performance Across All Model Types    
+def plot_figure_5(df):
+    """
+    Generates Figure 5: Mean test set FVAF as a function of training set size for all five cases.
     
-    plot_figure(ntraining_values, 
-                [df["FVAF_test"]],  # Need all model types compared
-                ["All Regularization Techniques"],
-                "Figure 5: Test Set FVAF vs. Training Set Size (All Methods)",
-                "FVAF",
-                "figure_5.png")
+    :param df: DataFrame containing test results
+    """
+    results, best_dropout, best_l2 = compute_best_test_performance(df)
+
+    plt.figure(figsize=(10, 5))
+
+    for label, values in results.items():
+        plt.plot(values.index, values, marker='o', linestyle='-', label=label)
+
+    plt.xlabel("Number of Training Folds")
+    plt.ylabel("Mean FVAF (Test Set)")
+    plt.legend()
+    plt.title("Figure 5: Test Performance Across All Model Types")
+    plt.grid()
+    plt.savefig("figure_5.png")
+    plt.show()
+
+    print(f"Best Dropout: {best_dropout}, Best L2 Regularization: {best_l2}")
 
 # Generate all figures
 def generate_all_figures():    
