@@ -3,21 +3,21 @@
 # Reasonable partitions: debug_5min, debug_30min, normal, debug_gpu, gpu
 
 #
-#SBATCH --partition=gpu
+#SBATCH --partition=normal
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=40
 #SBATCH --mem=1G
 
 # The %j is translated into the job number
-#SBATCH --output=results_part5/hw2_%j_stdout.txt
-#SBATCH --error=results_part5/hw2_%j_stderr.txt
+# #SBATCH --output=results_part5/hw2_%j_stdout.txt
+# #SBATCH --error=results_part5/hw2_%j_stderr.txt
 
 #SBATCH --time=01:00:00
-#SBATCH --job-name=hw2
+#SBATCH --job-name=hw2_part5
 #SBATCH --mail-user=Enzo.B.Durel-1@ou.edu
 #SBATCH --mail-type=ALL
 #SBATCH --chdir=/home/cs504305/hw2/code
-#SBATCH --array=44
+#SBATCH --array=
 #
 #################################################
 # Do not change this line unless you have your own python/tensorflow/keras set up
@@ -44,7 +44,7 @@ python hw2.py \
        --lrate 0.001 \
        --output_type 'theta' \
        --predict_dim 1 \
-       --epochs 1000 \
+       --epochs 400 \
        --exp_type $EXPERIMENT_TYPE \
        --exp_index $SLURM_ARRAY_TASK_ID \
        --dataset $DATASET \

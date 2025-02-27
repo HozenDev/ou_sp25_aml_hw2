@@ -3,7 +3,7 @@
 # Reasonable partitions: debug_5min, debug_30min, normal, debug_gpu, gpu
 
 #
-#SBATCH --partition=gpu
+#SBATCH --partition=normal
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=40
 #SBATCH --mem=1G
@@ -52,7 +52,5 @@ python hw2.py \
        --activation_hidden 'elu' \
        --label 'exp' \
        --nowandb \
-       --gpu \
-       --cpus_per_task $SLURM_CPUS_PER_TASK \
        --results_path './results_part2/' \
        --early_stopping

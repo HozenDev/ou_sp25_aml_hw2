@@ -32,7 +32,7 @@ def plot_figure(x_values, y_values, labels, title, ylabel, filename):
     plt.title(title)
     plt.grid()
     plt.savefig(filename)
-    plt.show()
+    # plt.show()
 
 # Figure 1: No Regularization vs. Early Stopping
 def plot_figure_1():
@@ -96,8 +96,6 @@ def plot_figure_4():
 def plot_figure_5():
     """
     Generates Figure 5: Mean test set FVAF as a function of training set size for all five cases.
-    
-    :param df: DataFrame containing test results
     """
     df = load_results(["part_1_pkl", "./results_part2", "./results_part3", "./results_part4", "./results_part5/"])
     
@@ -116,17 +114,17 @@ def plot_figure_5():
     plt.title("Figure 5: Test Performance Across All Model Types")
     plt.grid()
     plt.savefig("figure_5.png")
-    plt.show()
+    # plt.show()
 
     print(f"Best Dropout: {best_dropout}, Best L2 Regularization: {best_l2}")
 
 # Generate all figures
 def generate_all_figures():    
-    # plot_figure_1()
-    # plot_figure_2()
-    # plot_figure_3()
-    # plot_figure_4()
-    # plot_figure_5()
+    plot_figure_1()
+    plot_figure_2()
+    plot_figure_3()
+    plot_figure_4()
+    plot_figure_5()
 
     df = load_results(["part_1_pkl", "./results_part2", "./results_part3", "./results_part4", "./results_part5/"])
     statistical_comparisons(df)
