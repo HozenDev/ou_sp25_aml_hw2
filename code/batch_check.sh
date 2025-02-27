@@ -3,16 +3,16 @@
 # Reasonable partitions: debug_5min, debug_30min, normal, debug_gpu, gpu
 
 #
-#SBATCH --partition=debug_5min
+#SBATCH --partition=normal
 #SBATCH --ntasks=1
-#SBATCH --cpus-per-task=10
+#SBATCH --cpus-per-task=40
 #SBATCH --mem=1G
 
 # The %j is translated into the job number
 #SBATCH --output=results/hw2_check_%j_stdout.txt
 #SBATCH --error=results/hw2_check_%j_stderr.txt
 
-#SBATCH --time=00:05:00
+#SBATCH --time=00:20:00
 #SBATCH --job-name=hw2_check
 #SBATCH --chdir=/home/cs504305/hw2/code
 #
