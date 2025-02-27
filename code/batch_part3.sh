@@ -9,15 +9,15 @@
 #SBATCH --mem=1G
 
 # The %j is translated into the job number
-# #SBATCH --output=results_part3/hw2_%j_stdout.txt
-# #SBATCH --error=results_part3/hw2_%j_stderr.txt
+#SBATCH --output=noresults/stdout.txt
+#SBATCH --error=noresults/stderr.txt
 
 #SBATCH --time=00:45:00
 #SBATCH --job-name=hw2
 #SBATCH --mail-user=Enzo.B.Durel-1@ou.edu
 #SBATCH --mail-type=ALL
 #SBATCH --chdir=/home/cs504305/hw2/code
-#SBATCH --array=270-323
+#SBATCH --array=162-215,378-431
 #
 #################################################
 # Do not change this line unless you have your own python/tensorflow/keras set up

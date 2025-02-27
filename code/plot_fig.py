@@ -117,14 +117,14 @@ def plot_figure_5():
 
 # Generate all figures
 def generate_all_figures():    
-    plot_figure_1()
-    plot_figure_2()
-    plot_figure_3()
-    plot_figure_4()
-    plot_figure_5()
+    # plot_figure_1()
+    # plot_figure_2()
+    # plot_figure_3()
+    # plot_figure_4()
+    # plot_figure_5()
 
-    df = load_results(["results_part1", "./results_part2", "./results_part3", "./results_part4", "./results_part5/"])
-    statistical_comparisons(df)
+    #df = load_results(["results_part1", "./results_part2", "./results_part3", "./results_part4", "./results_part5/"])
+    #statistical_comparisons(df)
 
 if __name__ == "__main__":
     generate_all_figures()

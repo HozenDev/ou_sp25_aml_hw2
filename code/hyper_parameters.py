@@ -12,7 +12,7 @@ def load_results(results_dir=RESULTS):
     results = []
     files = []
     for r_dir in results_dir:
-        files.extend([os.path.join(r_dir, f) for f in os.listdir(r_dir) if f.startswith("bmi") and f.endswith(".pkl") and ('rotation_0' in f or 'rotation_18' in f)])
+        files.extend([os.path.join(r_dir, f) for f in os.listdir(r_dir) if f.startswith("bmi") and f.endswith(".pkl") and ('rotation_0' in f or 'rotation_18' in f or 'rotation_10' in f)])
 
     for filename in files:
         with open(filename, "rb") as fp:
