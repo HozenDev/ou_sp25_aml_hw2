@@ -122,8 +122,8 @@ def exp_type_to_hyperparameters(args:argparse.ArgumentParser):
     '''
     if args.exp_type == 'bmi':
         # HW 1
-        p = {'Ntraining': [1, 2, 3, 4, 6, 8, 11, 14, 18],
-             'rotation': [0, 2, 4, 6, 8, 10, 12, 14, 16, 18],
+        p = {'rotation': [0, 2, 4, 6, 8, 10, 12, 14, 16, 18],
+             'Ntraining': [1, 2, 3, 4, 6, 8, 11, 14, 18],
              }
     else: 
         assert False, "Bad exp_type"
@@ -476,11 +476,14 @@ def check_completeness(args:argparse.ArgumentParser):
     # Iterate over all possible jobs
     for i in range(ji.get_njobs()):
         params_str = ji.set_attributes_by_index(i, args)
+        print(params_str)
         # Compute output file name base
         fbase = generate_fname(args, params_str)
+        print(fbase)
     
         # Output pickle file name
         fname_out = "%s_results.pkl"%(fbase)
+        print(fname_out)
 
         if not os.path.exists(fname_out):
             # Results file does not exist: report it

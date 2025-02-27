@@ -1,0 +1,15 @@
+python hw2.py \
+       --hidden 200 100 50 25 12 6 \
+       --lrate 0.001 \
+       --output_type dtheta \
+       --predict_dim 1 \
+       --epochs 1000 \
+       --exp_type 'bmi' \
+       --exp_index 0 \
+       --dataset $DATASET \
+       --Ntraining ${NTRAINING_VALUES[$EXP_INDEX]} \
+       --rotation $ROTATION \
+       --activation_out 'linear' \
+       --activation_hidden 'elu' \
+       --label "exp" \
+       --nowandb \
