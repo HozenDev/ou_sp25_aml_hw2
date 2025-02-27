@@ -40,19 +40,19 @@ def deep_network_basic(n_inputs:int,
 
     # Hidden layer management
     for i, n in enumerate(n_hidden):
-        model.add(Dense(n, activation=activation, name=f'hidden{i}'))
+
+        if kernel_regularizer is not None and kernel_regularizer > 0.0:
+            model.add(Dense(n, activation=activation, name=f'hidden{i}', 
+                            kernel_regularizer=l2(kernel_regularizer)))
+        else:
+            model.add(Dense(n, activation=activation, name=f'hidden{i}'))
+
         if dropout is not None and dropout > 0.0:
             model.add(Dropout(dropout))
 
-    # Output layer management
-    if kernel_regularizer is not None and kernel_regularizer > 0.0:
-        model.add(Dense(n_output, activation=activation_out, 
-                        name='output', kernel_regularizer=l2(kernel_regularizer)))
-    elif kernel_regularizer_L1 is not None and kernel_regularizer_L1 > 0.0:
-        model.add(Dense(n_output, activation=activation_out, 
-                        name='output', kernel_regularizer=l1(kernel_regularizer_L1)))
-    else:
-        model.add(Dense(n_output, activation=activation_out, name='output'))
+
+    # Output layer
+    model.add(Dense(n_output, activation=activation_out, name='output'))
 
     # Compile the model
     opt = Adam(learning_rate=lrate)

@@ -6,16 +6,19 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 # Directory containing result files
-RESULTS = "./results/"
+RESULTS = ["./results/"]
 
 # Function to load experiment results
 def load_results(results_dir=RESULTS):
     results = []
-    files = [f for f in os.listdir(results_dir) if f.startswith("bmi_") and f.endswith(".pkl")]
-    
+    files = []
+    for r_dir in results_dir:
+        files.extend([os.path.join(r_dir, f) for f in os.listdir(r_dir) if f.startswith("bmi") and f.endswith(".pkl") and 'rotation_0' in f])
+
     for filename in files:
-        file_path = os.path.join(results_dir, filename)
-        with open(file_path, "rb") as fp:
+        print(filename)
+        
+        with open(filename, "rb") as fp:
             data = pickle.load(fp)
 
         rotation = data["args"].rotation
@@ -23,9 +26,12 @@ def load_results(results_dir=RESULTS):
         dropout = data["args"].dropout
         l2_reg = data["args"].L2_regularization
 
-        print(f"Rotation: {rotation}, Ntraining: {ntraining}, Dropout: {dropout}, L2 Regularization: {l2_reg}")
+        # rotation = data.get("rotation")
+        # ntraining = data.get("Ntraining")
+        # dropout = data.get("dropout")
+        # l2_reg = data.get("L2_regularization")
 
-        early_stopping = data["args"].early_stopping
+        # early_stopping = data["args"].early_stopping
         
         if ntraining is not None and rotation is not None:
             results.append({
@@ -33,7 +39,7 @@ def load_results(results_dir=RESULTS):
                 "Rotation": rotation,
                 "Dropout": dropout,
                 "L2_reg": l2_reg,
-                "Early_Stopping": early_stopping,
+                # "Early_Stopping": early_stopping,
                 "FVAF_train": data.get("predict_training_eval", [None, None])[1], 
                 "FVAF_val": data.get("predict_validation_eval", [None, None])[1],
                 "FVAF_test": data.get("predict_testing_eval", [None, None])[1]
@@ -66,6 +72,7 @@ def plot_figure(x_values, y_values, labels, title, ylabel, filename):
     
     plt.xlabel("Number of Training Folds")
     plt.ylabel(ylabel)
+    # plt.ylim([-1, 1])
     plt.legend()
     plt.title(title)
     plt.grid()
@@ -87,6 +94,9 @@ def plot_figure_1(df):
 def plot_figure_2(df_mean):
     df_list, ntraining_values, dropout_values = separate_by_column(df_mean, "Dropout")
     dropout_labels = [f"Dropout: {val}" for val in dropout_values]
+
+    print(ntraining_values)
+    print(df_list)
     
     plot_figure(ntraining_values, 
                 [df["FVAF_val"] for df in df_list],
@@ -134,7 +144,9 @@ def plot_figure_5(df_mean):
 
 # Generate all figures
 def generate_all_figures():
-    df = load_results("./results_part3/")
+    # df = load_results(["../../results_4/"])
+    # df = load_results(["./part_1_pkl/", "./results_part2/"])
+    df = load_results(["./results_part3/"])
     
     # plot_figure_1(df)
     plot_figure_2(df)

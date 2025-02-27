@@ -3,7 +3,7 @@
 # Reasonable partitions: debug_5min, debug_30min, normal, debug_gpu, gpu
 
 #
-#SBATCH --partition=disc_dual_a100_students
+#SBATCH --partition=normal
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=40
 #SBATCH --mem=1G
@@ -17,7 +17,7 @@
 #SBATCH --mail-user=Enzo.B.Durel-1@ou.edu
 #SBATCH --mail-type=ALL
 #SBATCH --chdir=/home/cs504305/hw2/code
-#SBATCH --array=0-539
+#SBATCH --array=0-89
 #
 #################################################
 # Do not change this line unless you have your own python/tensorflow/keras set up
@@ -52,6 +52,4 @@ python hw2.py \
        --activation_hidden 'elu' \
        --label 'exp' \
        --nowandb \
-       --gpu \
-       --cpus_per_task $SLURM_CPUS_PER_TASK \
        --results_path './results_part5/' \

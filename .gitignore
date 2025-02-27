@@ -1,7 +1,13 @@
 /code/__pycache__
 /code/figure_*
+
 !/code/results
 /code/results/*
+
+!/code/results_part?
+/code/results_part?/*
+!/code/results_part?/*.pkl
+
 /code/wandb
 
 /submit
