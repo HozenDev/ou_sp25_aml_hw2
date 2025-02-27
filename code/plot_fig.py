@@ -126,5 +126,7 @@ def generate_all_figures():
     #df = load_results(["results_part1", "./results_part2", "./results_part3", "./results_part4", "./results_part5/"])
     #statistical_comparisons(df)
 
+    pass
+
 if __name__ == "__main__":
     generate_all_figures()
