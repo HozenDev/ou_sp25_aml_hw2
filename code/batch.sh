@@ -56,5 +56,5 @@ python hw2.py \
        --dataset $DATASET \
        --activation_out 'linear' \
        --activation_hidden 'elu' \
-       --label "exp" \
+       --label 'exp' \
        --nowandb \
