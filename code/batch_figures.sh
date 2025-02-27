@@ -9,13 +9,11 @@
 #SBATCH --mem=1G
 
 # The %j is translated into the job number
-#SBATCH --output=results/hw2_%j_stdout.txt
-#SBATCH --error=results/hw2_%j_stderr.txt
+# #SBATCH --output=figures/hw2_%j_stdout.txt
+# #SBATCH --error=figures/hw2_%j_stderr.txt
 
 #SBATCH --time=00:05:00
-#SBATCH --job-name=hw2
-#SBATCH --mail-user=Enzo.B.Durel-1@ou.edu
-#SBATCH --mail-type=ALL
+#SBATCH --job-name=hw2_plot_figures
 #SBATCH --chdir=/home/cs504305/hw2/code
 #
 #################################################
