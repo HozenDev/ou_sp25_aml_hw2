@@ -12,7 +12,7 @@
 #SBATCH --output=results/hw2_%j_stdout.txt
 #SBATCH --error=results/hw2_%j_stderr.txt
 
-#SBATCH --time=00:20:00
+#SBATCH --time=00:45:00
 #SBATCH --job-name=hw2
 #SBATCH --mail-user=Enzo.B.Durel-1@ou.edu
 #SBATCH --mail-type=ALL
@@ -32,7 +32,7 @@ conda activate dnn
 EXPERIMENT_TYPE='bmi'
 DATASET='/home/fagg/datasets/bmi/bmi_dataset.pkl'
 NTRAINING_VALUES=(1 2 3 4 6 8 11 14 18)
-ROTATION=(0 2 4 6 8 10 12 14 16 18)
+ROTATION_VALUES=(0 2 4 6 8 10 12 14 16 18)
 NTRAINING_LENGTH=${#NTRAINING_VALUES[@]}
 ROTATION_LENGTH=${#ROTATION[@]}
 
@@ -48,14 +48,12 @@ ROTATION_INDEX=$(($SLURM_ARRAY_TASK_ID/$NTRAINING_LENGTH))
 python hw2.py \
        --hidden 200 100 50 25 12 6 \
        --lrate 0.001 \
-       --output_type dtheta \
+       --output_type 'theta' \
        --predict_dim 1 \
        --epochs 1000 \
        --exp_type $EXPERIMENT_TYPE \
        --exp_index $SLURM_ARRAY_TASK_ID \
        --dataset $DATASET \
-       --Ntraining ${NTRAINING_VALUES[$EXP_INDEX]} \
-       --rotation $ROTATION \
        --activation_out 'linear' \
        --activation_hidden 'elu' \
        --label "exp" \
