@@ -53,9 +53,6 @@ def plot_figure_2():
     df_list, ntraining_values, dropout_values = separate_by_column(df, "Dropout")
     dropout_labels = [f"Dropout: {val}" for val in dropout_values]
 
-    print(ntraining_values)
-    print(df_list)
-    
     plot_figure(ntraining_values, 
                 [df["FVAF_val"] for df in df_list],
                 dropout_labels,
