@@ -80,7 +80,8 @@ def plot_figure(x_values, y_values, labels, title, ylabel, filename):
     plt.show()
 
 # Figure 1: No Regularization vs. Early Stopping
-def plot_figure_1(df):
+def plot_figure_1():
+    df = load_results(["./part_1_pkl/", "./results_part2/"])
     df_list, ntraining_values, _ = separate_by_column(df, "Early_Stopping")
 
     plot_figure(ntraining_values, 
@@ -91,8 +92,10 @@ def plot_figure_1(df):
                 "figure_1.png")
 
 # Figure 2: Dropout Experiments
-def plot_figure_2(df_mean):
-    df_list, ntraining_values, dropout_values = separate_by_column(df_mean, "Dropout")
+def plot_figure_2():
+    df = load_results(["./results_part3/"])
+    
+    df_list, ntraining_values, dropout_values = separate_by_column(df, "Dropout")
     dropout_labels = [f"Dropout: {val}" for val in dropout_values]
 
     print(ntraining_values)
@@ -106,8 +109,10 @@ def plot_figure_2(df_mean):
                 "figure_2.png")
 
 # Figure 3: Dropout + Early Stopping
-def plot_figure_3(df_mean):
-    df_list, ntraining_values, dropout_values = separate_by_column(df_mean, "Dropout")
+def plot_figure_3():
+    df = load_results(["./results_part4/"])
+    
+    df_list, ntraining_values, dropout_values = separate_by_column(df, "Dropout")
     dropout_labels = [f"Early Stopping + Dropout of {val}" for val in dropout_values]
 
     plot_figure(ntraining_values, 
@@ -118,8 +123,10 @@ def plot_figure_3(df_mean):
                 "figure_3.png")
 
 # Figure 4: L2 Regularization
-def plot_figure_4(df_mean):
-    df_list, ntraining_values, l2_values = separate_by_column(df_mean, "L2_reg")
+def plot_figure_4():
+    df = load_results(["./results_part5/"])
+    
+    df_list, ntraining_values, l2_values = separate_by_column(df, "L2_reg")
     l2_labels = [f"L2: {val}" for val in l2_values]
 
     
@@ -131,28 +138,25 @@ def plot_figure_4(df_mean):
                 "figure_4.png")
 
 # Figure 5: Comparing All Methods
-def plot_figure_5(df_mean):
+def plot_figure_5():
+    df = load_results(["./results_part6/"])
 
-    ntraining_values = df_mean[0].index.tolist()
+    ntraining_values = df.index.tolist()
     
     plot_figure(ntraining_values, 
-                [df_mean["FVAF_test"]],  # Need all model types compared
+                [df["FVAF_test"]],  # Need all model types compared
                 ["All Regularization Techniques"],
                 "Figure 5: Test Set FVAF vs. Training Set Size (All Methods)",
                 "FVAF",
                 "figure_5.png")
 
 # Generate all figures
-def generate_all_figures():
-    # df = load_results(["../../results_4/"])
-    # df = load_results(["./part_1_pkl/", "./results_part2/"])
-    df = load_results(["./results_part3/"])
-    
-    # plot_figure_1(df)
-    plot_figure_2(df)
-    # plot_figure_3(df)
-    # plot_figure_4(df)
-    # plot_figure_5(df)
+def generate_all_figures():    
+    # plot_figure_1()
+    # plot_figure_2()
+    plot_figure_3()
+    # plot_figure_4()
+    # plot_figure_5()
 
 if __name__ == "__main__":
     generate_all_figures()
