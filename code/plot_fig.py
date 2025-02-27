@@ -19,25 +19,42 @@ def load_results():
             data = pickle.load(fp)
 
         match = re.search(r'Ntraining_(\d+)_rotation_(\d+)', filename)
-        if match:
-            ntraining = int(match.group(1))
-            rotation = int(match.group(2))
-            
+        ntraining = int(match.group(1)) if match else None
+        rotation = int(match.group(2)) if match else None
+        
+        dropout_match = re.search(r'drop_(\d+\.\d+)', filename)
+        dropout = float(dropout_match.group(1)) if dropout_match else None
+        
+        l2_match = re.search(r'L2_(\d+\.\d+)', filename)
+        l2_reg = float(l2_match.group(1)) if l2_match else None
+        
+        if ntraining is not None and rotation is not None:
             results.append({
                 "Ntraining": ntraining,
                 "Rotation": rotation,
-                "FVAF_train": data["predict_training_eval"][1], 
-                "FVAF_val": data["predict_validation_eval"][1],
-                "FVAF_test": data["predict_testing_eval"][1]
+                "Dropout": dropout,
+                "L2_reg": l2_reg,
+                "FVAF_train": data.get("predict_training_eval", [None, None])[1], 
+                "FVAF_val": data.get("predict_validation_eval", [None, None])[1],
+                "FVAF_test": data.get("predict_testing_eval", [None, None])[1]
             })
     
     return pd.DataFrame(results).sort_values(["Ntraining", "Rotation"])
 
+# Function to separate data by any column value
+def separate_by_column(df, column_name):
+    unique_column_values = df[column_name].dropna().unique()
+    df_separate = [df[df[column_name] == val] for val in unique_column_values]
+    df_mean = [df.groupby("Ntraining").mean() for df in df_separate]
+    ntraining_values = df_mean[0].index.tolist()
+
+    return df, ntraining_values, unique_column_values
+
 # Function to plot a figure
-def plot_figure(x, y_values, labels, title, ylabel, filename):
+def plot_figure(x_values, y_values, labels, title, ylabel, filename):
     plt.figure(figsize=(10, 5))
     for y, label in zip(y_values, labels):
-        plt.plot(x, y, marker='o', linestyle='-', label=label)
+        plt.plot(x_values, y, marker='o', linestyle='-', label=label)
     
     plt.xlabel("Number of Training Folds")
     plt.ylabel(ylabel)
@@ -48,25 +65,33 @@ def plot_figure(x, y_values, labels, title, ylabel, filename):
     plt.show()
 
 # Figure 1: No Regularization vs. Early Stopping
-def plot_figure_1(df_mean, ntraining_values):
+def plot_figure_1(df):
+    df_list, ntraining_values, _ = separate_by_column(df, "Early_Stopping")
+    
     plot_figure(ntraining_values, 
-                [df_mean["FVAF_test"], df_mean["FVAF_test"]],  # Need to separate no reg vs early stopping
+                df_list,
                 ["No Regularization", "Early Stopping"],
                 "Figure 1: Test Set FVAF vs. Training Set Size",
                 "FVAF",
                 "figure_1.png")
 
 # Figure 2: Dropout Experiments
-def plot_figure_2(df_mean, ntraining_values):
+def plot_figure_2(df_mean):
+    df_list, ntraining_values, dropout_values = separate_by_column(df_mean, "Dropout")
+    dropout_labels = [f"Dropout: {val}" for val in dropout_values]
+    
     plot_figure(ntraining_values, 
-                [df_mean["FVAF_val"]],  # Need separate dropout values here
-                ["Dropout (varying values)"],
+                df_list,  # Need separate dropout values here
+                dropout_labels,
                 "Figure 2: Validation FVAF vs. Training Set Size",
                 "FVAF",
                 "figure_2.png")
 
 # Figure 3: Dropout + Early Stopping
-def plot_figure_3(df_mean, ntraining_values):
+def plot_figure_3(df_mean):
+    df_list, ntraining_values, dropout_values = separate_by_column(df_mean, "Dropout")
+    dropout_labels = [f"Early Stopping + Dropout of {val}" for val in dropout_values]
+
     plot_figure(ntraining_values, 
                 [df_mean["FVAF_val"]],  # Need separate dropout values w/ early stopping
                 ["Dropout + Early Stopping"],
@@ -95,14 +120,12 @@ def plot_figure_5(df_mean, ntraining_values):
 # Generate all figures
 def generate_all_figures():
     df = load_results()
-    df_mean = df.groupby("Ntraining").mean()
-    ntraining_values = df_mean.index.tolist()
     
-    plot_figure_1(df_mean, ntraining_values)
-    plot_figure_2(df_mean, ntraining_values)
-    plot_figure_3(df_mean, ntraining_values)
-    plot_figure_4(df_mean, ntraining_values)
-    plot_figure_5(df_mean, ntraining_values)
+    plot_figure_1(df)
+    plot_figure_2(df)
+    plot_figure_3(df)
+    plot_figure_4(df)
+    plot_figure_5(df)
 
 if __name__ == "__main__":
     generate_all_figures()

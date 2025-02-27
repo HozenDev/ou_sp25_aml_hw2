@@ -3,7 +3,7 @@
 # Reasonable partitions: debug_5min, debug_30min, normal, debug_gpu, gpu
 
 #
-#SBATCH --partition=normal
+#SBATCH --partition=gpu
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=40
 #SBATCH --mem=1G
@@ -58,3 +58,4 @@ python hw2.py \
        --activation_hidden 'elu' \
        --label 'exp' \
        --nowandb \
+       --gpu \

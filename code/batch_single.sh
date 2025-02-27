@@ -1,29 +1,22 @@
-EXPERIMENT_TYPE='bmi'
-DATASET='../../datasets/bmi_dataset.pkl'
-NTRAINING_VALUES=(1 2 3 4 6 8 11 14 18)
-ROTATION=(0 2 4 6 8 10 12 14 16 18)
-NTRAINING_LENGTH=${#NTRAINING_VALUES[@]}
-ROTATION_LENGTH=${#ROTATION[@]}
+DATASET=../../datasets/bmi_dataset.pkl
 
-for i in "${ROTATION[@]}"
+for i in $(seq 0 89)
 do
-    for j in "${NTRAINING_VALUES[@]}"
-    do
-        echo "R:$i TV:$j"
-        python hw2.py \
-               --hidden 200 100 50 25 12 6 \
-               --lrate 0.001 \
-               --output_type dtheta \
-               --predict_dim 1 \
-               --epochs 1000 \
-               --exp_type 'bmi' \
-               --exp_index 0 \
-               --dataset $DATASET \
-               --Ntraining $j \
-               --rotation $i \
-               --activation_out 'linear' \
-               --activation_hidden 'elu' \
-               --label "exp" \
-               --nowandb \
-    done
+    echo "Running experiment $i"
+    
+    python hw2.py \
+           --hidden 200 100 50 25 12 6 \
+           --lrate 0.001 \
+           --output_type 'theta' \
+           --predict_dim 1 \
+           --epochs 1000 \
+           --exp_type 'bmi' \
+           --exp_index $i \
+           --dataset $DATASET \
+           --activation_out 'linear' \
+           --activation_hidden 'elu' \
+           --label "exp" \
+           --nowandb \
+           --early_stopping \
+           &> results/hw2_${i}_stdout.txt
 done
