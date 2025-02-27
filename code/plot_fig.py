@@ -1,51 +1,6 @@
-import os
-import re
-import pickle
-import numpy as np
-import pandas as pd
 import matplotlib.pyplot as plt
 
-# from hyper_parameters import *
-
-# Directory containing result files
-RESULTS = ["./results/"]
-
-# Function to load experiment results
-def load_results(results_dir=RESULTS):
-    results = []
-    files = []
-    for r_dir in results_dir:
-        files.extend([os.path.join(r_dir, f) for f in os.listdir(r_dir) if f.startswith("bmi") and f.endswith(".pkl") and ('rotation_0' in f or 'rotation_18' in f)])
-
-    for filename in files:
-        with open(filename, "rb") as fp:
-            data = pickle.load(fp)
-
-        rotation = data["args"].rotation
-        ntraining = data["args"].Ntraining
-        dropout = data["args"].dropout
-        l2_reg = data["args"].L2_regularization
-
-        # rotation = data.get("rotation")
-        # ntraining = data.get("Ntraining")
-        # dropout = data.get("dropout")
-        # l2_reg = data.get("L2_regularization")
-
-        # early_stopping = data["args"].early_stopping
-
-        if ntraining is not None and rotation is not None:
-            results.append({
-                "Ntraining": ntraining,
-                "Rotation": rotation,
-                "Dropout": dropout,
-                "L2_reg": l2_reg,
-                # "Early_Stopping": early_stopping,
-                "FVAF_train": data.get("predict_training_eval", [None, None])[1], 
-                "FVAF_val": data.get("predict_validation_eval", [None, None])[1],
-                "FVAF_test": data.get("predict_testing_eval", [None, None])[1]
-            })
-    
-    return pd.DataFrame(results).sort_values(["Ntraining", "Rotation"])
+from hyper_parameters import *
 
 # Function to separate data by any column value
 def separate_by_column(df, column_name):
@@ -138,13 +93,17 @@ def plot_figure_4():
                 "figure_4.png")
 
 # Figure 5: Test Performance Across All Model Types    
-def plot_figure_5(df):
+def plot_figure_5():
     """
     Generates Figure 5: Mean test set FVAF as a function of training set size for all five cases.
     
     :param df: DataFrame containing test results
     """
+    df = load_results(["part_1_pkl", "./results_part2", "./results_part3", "./results_part4", "./results_part5/"])
+    
     results, best_dropout, best_l2 = compute_best_test_performance(df)
+
+    print(best_dropout,  best_l2)
 
     plt.figure(figsize=(10, 5))
 
@@ -166,8 +125,11 @@ def generate_all_figures():
     # plot_figure_1()
     # plot_figure_2()
     # plot_figure_3()
-    plot_figure_4()
+    # plot_figure_4()
     # plot_figure_5()
+
+    df = load_results(["part_1_pkl", "./results_part2", "./results_part3", "./results_part4", "./results_part5/"])
+    statistical_comparisons(df)
 
 if __name__ == "__main__":
     generate_all_figures()
