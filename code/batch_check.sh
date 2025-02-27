@@ -25,4 +25,9 @@ conda activate dnn
 # Clean results repo and wandb
 # ./clean.sh 
 
-python hw2.py --check --exp_type 'bmi' --label 'exp' --output_type 'theta' --predict_dim 1
+python hw2.py --check \
+       --hidden 200 100 50 25 12 6 \
+       --exp_type 'bmi' \
+       --label 'exp' \
+       --output_type 'theta' \
+       --predict_dim 1
