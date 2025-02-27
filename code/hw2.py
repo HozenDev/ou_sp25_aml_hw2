@@ -124,6 +124,7 @@ def exp_type_to_hyperparameters(args:argparse.ArgumentParser):
         # HW 1
         p = {'rotation': [0, 2, 4, 6, 8, 10, 12, 14, 16, 18],
              'Ntraining': [1, 2, 3, 4, 6, 8, 11, 14, 18],
+             'dropout': [0.015625, 0.03125, 0.0675, 0.125, 0.25, 0.5],
              }
     else: 
         assert False, "Bad exp_type"

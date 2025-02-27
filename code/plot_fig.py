@@ -93,23 +93,30 @@ def plot_figure_3(df_mean):
     dropout_labels = [f"Early Stopping + Dropout of {val}" for val in dropout_values]
 
     plot_figure(ntraining_values, 
-                [df_mean["FVAF_val"]],  # Need separate dropout values w/ early stopping
-                ["Dropout + Early Stopping"],
+                df_list,  # Need separate dropout values w/ early stopping
+                dropout_labels,
                 "Figure 3: Validation FVAF vs. Training Set Size (Dropout + Early Stopping)",
                 "FVAF",
                 "figure_3.png")
 
 # Figure 4: L2 Regularization
-def plot_figure_4(df_mean, ntraining_values):
+def plot_figure_4(df_mean):
+    df_list, ntraining_values, l2_values = separate_by_column(df_mean, "L2_reg")
+    l2_labels = [f"L2: {val}" for val in l2_values]
+
+    
     plot_figure(ntraining_values, 
-                [df_mean["FVAF_val"]],  # Need separate L2 values
-                ["L2 Regularization (varying values)"],
+                df_list,
+                l2_labels,
                 "Figure 4: Validation FVAF vs. Training Set Size (L2 Regularization)",
                 "FVAF",
                 "figure_4.png")
 
 # Figure 5: Comparing All Methods
-def plot_figure_5(df_mean, ntraining_values):
+def plot_figure_5(df_mean):
+
+    ntraining_values = df_mean[0].index.tolist()
+    
     plot_figure(ntraining_values, 
                 [df_mean["FVAF_test"]],  # Need all model types compared
                 ["All Regularization Techniques"],
