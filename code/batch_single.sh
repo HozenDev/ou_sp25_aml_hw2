@@ -1,6 +1,6 @@
 DATASET=../../datasets/bmi_dataset.pkl
 
-for i in $(seq 0 89)
+for i in $(seq 22 89)
 do
     echo "Running experiment $i"
     

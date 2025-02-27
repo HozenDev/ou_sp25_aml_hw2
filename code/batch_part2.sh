@@ -9,15 +9,15 @@
 #SBATCH --mem=1G
 
 # The %j is translated into the job number
-#SBATCH --output=results/hw2_%j_stdout.txt
-#SBATCH --error=results/hw2_%j_stderr.txt
+#SBATCH --output=results_part2/hw2_%j_stdout.txt
+#SBATCH --error=results_part2/hw2_%j_stderr.txt
 
 #SBATCH --time=00:45:00
 #SBATCH --job-name=hw2
 #SBATCH --mail-user=Enzo.B.Durel-1@ou.edu
 #SBATCH --mail-type=ALL
 #SBATCH --chdir=/home/cs504305/hw2/code
-#SBATCH --array=0-89
+#SBATCH --array=0-1
 #
 #################################################
 # Do not change this line unless you have your own python/tensorflow/keras set up
@@ -54,4 +54,5 @@ python hw2.py \
        --nowandb \
        --gpu \
        --cpus_per_task $SLURM_CPUS_PER_TASK \
-       --results_path './results_part1/' \
+       --results_path './results_part2/' \
+       --early_stopping

@@ -9,8 +9,8 @@
 #SBATCH --mem=1G
 
 # The %j is translated into the job number
-#SBATCH --output=results/hw2_%j_stdout.txt
-#SBATCH --error=results/hw2_%j_stderr.txt
+#SBATCH --output=results_part1/hw2_%j_stdout.txt
+#SBATCH --error=results_part1/hw2_%j_stderr.txt
 
 #SBATCH --time=00:45:00
 #SBATCH --job-name=hw2
