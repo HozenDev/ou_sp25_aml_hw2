@@ -53,4 +53,4 @@ python hw2.py \
        --label 'exp' \
        --nowandb \
        --gpu \
-       --cpus-per-task $SLURM_CPUS_PER_TASK \
+       --cpus_per_task $SLURM_CPUS_PER_TASK \
