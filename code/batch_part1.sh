@@ -44,7 +44,7 @@ python hw2.py \
        --lrate 0.001 \
        --output_type 'theta' \
        --predict_dim 1 \
-       --epochs 1000 \
+       --epochs 400 \
        --exp_type $EXPERIMENT_TYPE \
        --exp_index $SLURM_ARRAY_TASK_ID \
        --dataset $DATASET \
