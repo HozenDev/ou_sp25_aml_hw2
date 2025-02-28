@@ -17,7 +17,7 @@
 #SBATCH --mail-user=Enzo.B.Durel-1@ou.edu
 #SBATCH --mail-type=ALL
 #SBATCH --chdir=/home/cs504305/hw2/code
-#SBATCH --array=316,405-449
+#SBATCH --array=54-107,108-161,216-269,324-377,432-485
 #
 #################################################
 # Do not change this line unless you have your own python/tensorflow/keras set up
